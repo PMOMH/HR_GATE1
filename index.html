@@ -3,183 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة الموارد البشرية</title>
-    <!-- استدعاء خط "Cairo" من Google Fonts لدعم اللغة العربية بشكل جميل -->
+    <title>بوابة الموارد البشرية | الإصدار المطور</title>
+    <!-- استدعاء خط "Cairo" من Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* تعريف متغيرات الألوان والتصميم */
+        /* --- 1. المتغيرات والأساسيات --- */
         :root {
-            --primary-color: #2c3e50; /* كحلي داكن */
-            --secondary-color: #3498db; /* أزرق فاتح */
-            --accent-color: #e67e22; /* برتقالي للتمييز */
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e67e22;
+            --dark-bg: #1a252f;
             --light-bg: #f8f9fa;
             --white: #ffffff;
             --text-color: #333333;
             --text-light: #666666;
-            --border-radius: 8px;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
+            --border-radius: 12px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* إعادة ضبط التنسيقات الأساسية */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Cairo', sans-serif;
             background-color: var(--light-bg);
             color: var(--text-color);
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
 
-        ul {
-            list-style: none;
-        }
-
-        /* تنسيق الرأس (Header) */
-        header {
-            background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
+        /* --- 2. مكونات الواجهة (UI Components) --- */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo span {
-            color: var(--secondary-color);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            font-weight: 600;
-            color: var(--primary-color);
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--secondary-color);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            right: 0;
-            background-color: var(--secondary-color);
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .cta-button {
-            background-color: var(--secondary-color);
-            color: var(--white) !important;
-            padding: 10px 25px;
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .cta-button:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
-        }
-
-        .cta-button::after {
-            display: none;
-        }
-
-        /* قسم البطل (Hero Section) */
-        .hero {
-            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('https://picsum.photos/seed/office/1920/1080.jpg') no-repeat center center/cover;
-            height: 600px;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            opacity: 0.9;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-
         .btn {
-            padding: 12px 30px;
+            display: inline-block;
+            padding: 14px 35px;
             border-radius: var(--border-radius);
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: var(--transition);
             border: none;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
 
-        .btn-primary {
-            background-color: var(--secondary-color);
-            color: var(--white);
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0%; height: 100%;
+            background-color: rgba(255,255,255,0.2);
+            transition: var(--transition);
+            z-index: -1;
         }
 
-        .btn-primary:hover {
-            background-color: #2980b9;
-        }
+        .btn:hover::before { width: 100%; }
+
+        .btn-primary { background-color: var(--secondary-color); color: var(--white); box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4); }
 
         .btn-outline {
             background-color: transparent;
@@ -187,34 +88,181 @@
             color: var(--white);
         }
 
-        .btn-outline:hover {
-            background-color: var(--white);
+        .btn-outline:hover { background-color: var(--white); color: var(--primary-color); }
+
+        /* --- 3. الرأس والقائمة (Header & Nav) --- */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            height: 70px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 90px;
+            transition: var(--transition);
+        }
+
+        header.scrolled .navbar { height: 70px; }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span { color: var(--secondary-color); }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.05rem;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            right: 0;
+            background-color: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover { color: var(--secondary-color); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .cta-button {
+            background-color: var(--primary-color);
+            color: var(--white) !important;
+            padding: 10px 25px;
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(44, 62, 80, 0.3);
+        }
+        .cta-button:hover { background-color: var(--secondary-color); color: var(--white); transform: translateY(-2px); }
+        .cta-button::after { display: none; }
+
+        /* Mobile Menu Button */
+        .mobile-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.8rem;
             color: var(--primary-color);
         }
 
-        /* الأقسام العامة */
-        section {
-            padding: 80px 0;
+        /* --- 4. القسم الرئيسي (Hero) --- */
+        .hero {
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.9), rgba(52, 152, 219, 0.8)), url('https://picsum.photos/seed/office_work/1920/1080.jpg') no-repeat center center/cover;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            padding-top: 90px; /* For fixed header */
         }
 
+        .hero-content { opacity: 0; transform: translateY(30px); animation: fadeInUp 1s forwards 0.5s; }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* --- 5. الأقسام العامة والانتقالات --- */
+        section { padding: 100px 0; }
+        
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
         }
 
         .section-title h2 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             color: var(--primary-color);
             margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            border-radius: 2px;
         }
 
         .section-title p {
             color: var(--text-light);
             max-width: 600px;
-            margin: 0 auto;
+            margin: 20px auto 0;
+            font-size: 1.1rem;
         }
 
-        /* قسم الخدمات (Services) */
+        /* Scroll Animation Class */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- 6. الخدمات (Services) --- */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -223,47 +271,43 @@
 
         .service-card {
             background: var(--white);
-            padding: 30px;
+            padding: 40px 30px;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
             transition: var(--transition);
             text-align: center;
-            border-top: 4px solid transparent;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.03);
         }
 
         .service-card:hover {
-            transform: translateY(-10px);
-            border-top: 4px solid var(--secondary-color);
+            transform: translateY(-15px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
         }
 
         .icon-box {
-            width: 70px;
-            height: 70px;
-            background-color: rgba(52, 152, 219, 0.1);
-            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--secondary-color), #5dade2);
+            border-radius: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0 auto 20px;
-            font-size: 1.8rem;
-            color: var(--secondary-color);
+            margin: 0 auto 25px;
+            color: var(--white);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
         }
 
-        .service-card h3 {
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
+        .service-card h3 { margin-bottom: 15px; color: var(--primary-color); font-size: 1.4rem; }
+        .service-card p { color: var(--text-light); font-size: 1rem; line-height: 1.8; }
 
-        .service-card p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
-
-        /* قسم إحصائيات سريعة (Stats) */
+        /* --- 7. الإحصائيات (Stats) --- */
         .stats {
             background-color: var(--primary-color);
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2334495e' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             color: var(--white);
-            padding: 60px 0;
+            padding: 80px 0;
         }
 
         .stats-grid {
@@ -274,21 +318,18 @@
         }
 
         .stat-item h3 {
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-size: 3rem;
+            font-weight: 800;
             margin-bottom: 10px;
             color: var(--secondary-color);
         }
 
-        .stat-item p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
+        .stat-item p { font-size: 1.2rem; font-weight: 600; opacity: 0.9; }
 
-        /* قسم الأخبار (News & Events) */
+        /* --- 8. الأخبار (News) --- */
         .news-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
         }
 
@@ -300,159 +341,154 @@
             transition: var(--transition);
         }
 
-        .news-card:hover {
-            transform: translateY(-5px);
-        }
+        .news-card:hover { transform: translateY(-10px); }
 
         .news-image {
-            height: 200px;
-            background-color: #ddd;
+            height: 240px;
             position: relative;
+            overflow: hidden;
         }
-        
+
         .news-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
         }
+
+        .news-card:hover .news-image img { transform: scale(1.1); }
 
         .news-date {
             position: absolute;
-            top: 15px;
-            left: 15px;
+            top: 20px;
+            right: 20px; /* RTL Adjusted */
             background-color: var(--accent-color);
             color: var(--white);
-            padding: 5px 12px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
-        .news-content {
-            padding: 20px;
-        }
+        .news-content { padding: 25px; }
 
         .news-content h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
             color: var(--primary-color);
+            line-height: 1.4;
         }
 
         .news-content p {
             color: var(--text-light);
-            margin-bottom: 15px;
-            font-size: 0.9rem;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
         }
 
         .read-more {
             color: var(--secondary-color);
-            font-weight: 600;
-            font-size: 0.9rem;
+            font-weight: 700;
+            font-size: 0.95rem;
             display: inline-flex;
             align-items: center;
             gap: 5px;
+            transition: var(--transition);
         }
 
-        .read-more:hover {
-            gap: 10px; /* حركة بسيطة للسهم */
-        }
+        .read-more:hover { gap: 10px; color: var(--primary-color); }
 
-        /* قسم التواصل (Contact) */
-        .contact-section {
-            background-color: var(--white);
-        }
-
+        /* --- 9. التواصل (Contact) --- */
+        .contact-section { background-color: var(--white); position: relative; }
+        
         .contact-container {
             display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 40px;
-            align-items: center;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 50px;
+            align-items: flex-start;
         }
 
-        .contact-info {
-            padding: 20px;
-        }
+        .contact-info { padding: 20px; }
 
         .info-item {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 25px;
-            gap: 15px;
+            margin-bottom: 30px;
+            gap: 20px;
         }
 
         .info-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(52, 152, 219, 0.1);
             color: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             font-size: 1.2rem;
-            margin-top: 5px;
+            flex-shrink: 0;
         }
 
-        .info-content h4 {
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-            color: var(--primary-color);
-        }
-
-        .info-content p {
-            color: var(--text-light);
-        }
+        .info-content h4 { font-size: 1.2rem; margin-bottom: 5px; color: var(--primary-color); }
+        .info-content p { color: var(--text-light); }
 
         .contact-form {
             background: var(--light-bg);
             padding: 40px;
-            border-radius: var(--border-radius);
+            border-radius: 20px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+        .form-group { margin-bottom: 20px; position: relative; }
 
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--primary-color);
+            font-size: 0.95rem;
         }
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
+        .form-control {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
             font-family: inherit;
+            font-size: 1rem;
             outline: none;
             transition: var(--transition);
+            background-color: var(--white);
         }
 
-        .form-group input:focus,
-        .form-group textarea:focus {
+        .form-control:focus {
             border-color: var(--secondary-color);
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
         }
 
-        /* التذييل (Footer) */
+        /* --- 10. التذييل (Footer) --- */
         footer {
-            background-color: var(--primary-color);
+            background-color: var(--dark-bg);
             color: var(--white);
-            padding: 50px 0 20px;
+            padding: 70px 0 20px;
             margin-top: 50px;
+            border-top: 5px solid var(--secondary-color);
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 40px;
-            margin-bottom: 40px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 30px;
+            margin-bottom: 50px;
         }
 
         .footer-col h4 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
+            font-size: 1.3rem;
+            margin-bottom: 25px;
             position: relative;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
         }
 
         .footer-col h4::after {
@@ -460,100 +496,145 @@
             position: absolute;
             bottom: 0;
             right: 0;
-            width: 40px;
-            height: 2px;
+            width: 50px;
+            height: 3px;
             background-color: var(--secondary-color);
+            border-radius: 2px;
         }
 
-        .footer-links li {
-            margin-bottom: 10px;
-        }
+        .footer-col p { color: rgba(255,255,255,0.6); line-height: 1.8; }
+
+        .footer-links li { margin-bottom: 12px; }
 
         .footer-links a {
             color: rgba(255,255,255,0.7);
             transition: var(--transition);
+            display: block;
         }
 
         .footer-links a:hover {
-            color: var(--white);
-            padding-right: 5px;
+            color: var(--secondary-color);
+            transform: translateX(-5px); /* RTL move left */
         }
 
         .copyright {
             text-align: center;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255,255,255,0.4);
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
             font-size: 0.9rem;
         }
 
-        /* تحسينات الموبايل */
+        /* --- 11. إشعار التوست (Toast Notification) --- */
+        #toast {
+            visibility: hidden;
+            min-width: 300px;
+            background-color: var(--primary-color);
+            color: #fff;
+            text-align: center;
+            border-radius: 50px;
+            padding: 16px;
+            position: fixed;
+            z-index: 2000;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            font-size: 1rem;
+            opacity: 0;
+            transition: opacity 0.5s, bottom 0.5s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px;
+        }
+
+        #toast svg { color: #2ecc71; width: 24px; height: 24px; }
+
+        /* --- 12. استعلامات الوسائط (Responsive) --- */
+        @media (max-width: 992px) {
+            .contact-container { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.8rem; }
+        }
+
         @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2rem;
-            }
+            .navbar { height: 70px; }
+            header.scrolled .navbar { height: 70px; }
             
-            .navbar {
-                flex-direction: column;
-                height: auto;
-                padding: 15px 0;
-            }
-
+            .mobile-toggle { display: block; }
+            
             .nav-links {
-                margin-top: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
-            }
-
-            .cta-button {
-                display: none; /* إخفاء الزر في القائمة العلوية للموبايل لتوفير المساحة */
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-buttons {
+                position: fixed;
+                top: 70px;
+                left: 0; /* Cover from left in RTL */
+                width: 100%;
+                background-color: var(--white);
                 flex-direction: column;
+                padding: 30px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                transform: translateY(-150%);
+                transition: var(--transition);
+                z-index: 999;
             }
+
+            .nav-links.active { transform: translateY(0); }
             
-            .btn {
+            .cta-button {
                 width: 100%;
                 text-align: center;
+                margin-top: 20px;
             }
+
+            .hero h1 { font-size: 2.2rem; }
+            .hero-buttons { flex-direction: column; }
+            .btn { width: 100%; }
+            
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .section-title h2 { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- رأس الصفحة -->
-    <header>
+    <!-- الرأس -->
+    <header id="header">
         <div class="container navbar">
             <div class="logo">
-                <!-- أيقونة بسيطة باستخدام SVG -->
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 HR <span>Portal</span>
             </div>
+            
+            <div class="mobile-toggle" id="mobile-toggle">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </div>
+
             <nav>
-                <ul class="nav-links">
-                    <li><a href="#home">الرئيسية</a></li>
-                    <li><a href="#services">خدماتنا</a></li>
-                    <li><a href="#news">الأخبار</a></li>
-                    <li><a href="#contact">تواصل معنا</a></li>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#home" onclick="closeMenu()">الرئيسية</a></li>
+                    <li><a href="#services" onclick="closeMenu()">خدماتنا</a></li>
+                    <li><a href="#news" onclick="closeMenu()">الأخبار</a></li>
+                    <li><a href="#contact" onclick="closeMenu()">تواصل معنا</a></li>
                     <li><a href="#" class="cta-button">دخول الموظفين</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- القسم الرئيسي (Hero) -->
+    <!-- القسم الرئيسي -->
     <section id="home" class="hero">
         <div class="container hero-content">
-            <h1>شريكك الاستراتيجي في إدارة المواهب</h1>
-            <p>نسعى في قسم الموارد البشرية لتوفير بيئة عمل محفزة، تدعم النمو المهني وتحقق التوازن بين الحياة العملية والشخصية لكل موظف.</p>
+            <h1>شريكك الاستراتيجي في<br>إدارة المواهب البشرية</h1>
+            <p>نبتكر بيئة عمل ملهم تجمع بين الإنتاجية والرفاهية، ونسعى لتحقيق الطموحات المهنية لكل فرد في فريقنا.</p>
             <div class="hero-buttons">
                 <a href="#services" class="btn btn-primary">استكشف الخدمات</a>
                 <a href="#contact" class="btn btn-outline">انضم لفريقنا</a>
@@ -565,19 +646,19 @@
     <div class="stats">
         <div class="container stats-grid">
             <div class="stat-item">
-                <h3>+500</h3>
+                <h3 data-target="500">+0</h3>
                 <p>موظف</p>
             </div>
             <div class="stat-item">
-                <h3>+15</h3>
+                <h3 data-target="15">+0</h3>
                 <p>قسم</p>
             </div>
             <div class="stat-item">
-                <h3>+200</h3>
+                <h3 data-target="200">+0</h3>
                 <p>تدريب سنوي</p>
             </div>
             <div class="stat-item">
-                <h3>98%</h3>
+                <h3 data-target="98">0%</h3>
                 <p>نسبة الرضا</p>
             </div>
         </div>
@@ -585,79 +666,79 @@
 
     <!-- قسم الخدمات -->
     <section id="services" class="container">
-        <div class="section-title">
+        <div class="section-title reveal">
             <h2>خدمات الموارد البشرية</h2>
-            <p>نقدم مجموعة متكاملة من الخدمات لدعم الموظفين في مسيرتهم المهنية والوظيفية.</p>
+            <p>حلول متكاملة مصممة لرفع كفاءة الموظفين ودعم مسيرتهم المهنية.</p>
         </div>
         <div class="services-grid">
             <!-- خدمة 1 -->
-            <div class="service-card">
+            <div class="service-card reveal">
                 <div class="icon-box">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
                 </div>
                 <h3>الوظائف والتوظيف</h3>
-                <p>تصفح الفرص الوظيفية المتاحة وقدم طلبك للانضمام إلى فريقنا المبدع والمتميز.</p>
+                <p>منصة ذكية لربط المواهب بالفرص المناسبة، وتوفير تجربة توظيف سلسة وشفافة.</p>
             </div>
             <!-- خدمة 2 -->
-            <div class="service-card">
+            <div class="service-card reveal">
                 <div class="icon-box">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                 </div>
                 <h3>الحضور والانصراف</h3>
-                <p>نظام إلكتروني متكامل لتسجيل الحضور والانصراف وطلب الإجازات بكل سهولة.</p>
+                <p>نظام دقيق لتتبع الدوام الرقمي، يتيح للموظفين إدارة إجازاتهم وساعات العمل بسهولة.</p>
             </div>
             <!-- خدمة 3 -->
-            <div class="service-card">
+            <div class="service-card reveal">
                 <div class="icon-box">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                 </div>
                 <h3>التطوير والتدريب</h3>
-                <p>برامج تدريبية متخصصة لتطوير المهارات وزيادة الكفاءة والإنتاجية.</p>
+                <p>مسارات تعليمية مخصصة لصقل المهارات القيادية والتقنية وضمان الاستمرارية في التطور.</p>
             </div>
         </div>
     </section>
 
-    <!-- قسم الأخبار والفعاليات -->
+    <!-- قسم الأخبار -->
     <section id="news" style="background-color: var(--white);">
         <div class="container">
-            <div class="section-title">
+            <div class="section-title reveal">
                 <h2>آخر الأخبار والفعاليات</h2>
-                <p>تابع ما يدور في الشركة من أخبار، فعاليات، وإنجازات موظفينا.</p>
+                <p>نافذة على إنجازات فريقنا والفعاليات التي نصنعها معاً.</p>
             </div>
             <div class="news-grid">
                 <!-- خبر 1 -->
-                <div class="news-card">
+                <div class="news-card reveal">
                     <div class="news-image">
-                        <img src="https://picsum.photos/seed/meeting/400/300" alt="اجتماع فريق العمل">
+                        <img src="https://picsum.photos/seed/meeting_hr/600/400" alt="اجتماع فريق العمل">
                         <span class="news-date">10 أكتوبر 2023</span>
                     </div>
                     <div class="news-content">
                         <h3>حفل تكريم الموظف المثالي للربع الثالث</h3>
-                        <p>احتفلت إدارة الشركة مساء اليوم بتكريم الموظف المثالي ومكافأة الفرق المتميزة...</p>
+                        <p>في احتفالية رائعة، كرمت الإدارة الموظفين المتميزين تقديراً لجهودهم الاستثنائية هذا الربع.</p>
                         <a href="#" class="read-more">اقرأ المزيد &larr;</a>
                     </div>
                 </div>
                 <!-- خبر 2 -->
-                <div class="news-card">
+                <div class="news-card reveal">
                     <div class="news-image">
-                        <img src="https://picsum.photos/seed/training/400/300" alt="ورشة عمل">
+                        <img src="https://picsum.photos/seed/training_hr/600/400" alt="ورشة عمل">
                         <span class="news-date">05 أكتوبر 2023</span>
                     </div>
                     <div class="news-content">
                         <h3>انطلاق ورشة عمل حول القيادة الفعالة</h3>
-                        <p>بدأت صباح اليوم ورشة عمل مكثفة تهدف إلى تنمية مهارات القيادة لدى مديري الأقسام...</p>
+                        <p>برنامج تدريبي مكثف يهدف إلى تعزيز مهارات القيادة لدى رؤساء الأقسام ومديري المشاريع.</p>
                         <a href="#" class="read-more">اقرأ المزيد &larr;</a>
                     </div>
                 </div>
                 <!-- خبر 3 -->
-                <div class="news-card">
+                <div class="news-card reveal">
                     <div class="news-image">
-                        <img src="https://picsum.photos/seed/party/400/300" alt="يوم الرياض">
+                        <img src="https://picsum.photos/seed/party_hr/600/400" alt="يوم الرياض">
                         <span class="news-date">01 أكتوبر 2023</span>
                     </div>
                     <div class="news-content">
                         <h3>احتفالات الشركة باليوم الوطني</h3>
-                        <p>شارك موظفو الشركة في الفعاليات الترفيهية التي نظمتها إدارة الموارد البشرية...</p>
+                        <p>أجواء وطنية طغت على مقر الشركة، حيث شارك الجميع في فعاليات تعبر عن الفخر والانتماء.</p>
                         <a href="#" class="read-more">اقرأ المزيد &larr;</a>
                     </div>
                 </div>
@@ -669,10 +750,10 @@
     <section id="contact" class="contact-section">
         <div class="container contact-container">
             <!-- معلومات الاتصال -->
-            <div class="contact-info">
+            <div class="contact-info reveal">
                 <h2 style="margin-bottom: 30px; color: var(--primary-color);">تواصل معنا</h2>
-                <p style="margin-bottom: 30px; color: var(--text-light);">
-                    هل لديك استفسار أو تحتاج إلى مساعدة؟ فريق دعم الموارد البشرية جاهز للرد على جميع استفساراتك.
+                <p style="margin-bottom: 40px; color: var(--text-light); font-size: 1.1rem;">
+                    فريقنا جاهز للإجابة على جميع استفساراتك. لا تتردد في مراسلتنا.
                 </p>
                 
                 <div class="info-item">
@@ -681,7 +762,7 @@
                     </div>
                     <div class="info-content">
                         <h4>العنوان</h4>
-                        <p>مبنى الإدارة العامة، الطابق الثالث، الرياض</p>
+                        <p>مبنى الإدارة العامة، الطابق الثالث، الرياض، المملكة العربية السعودية</p>
                     </div>
                 </div>
 
@@ -707,19 +788,19 @@
             </div>
 
             <!-- نموذج الاتصال -->
-            <div class="contact-form">
-                <form action="#" method="POST" onsubmit="event.preventDefault(); alert('تم استلام رسالتك بنجاح! شكراً لتواصلك معنا.');">
+            <div class="contact-form reveal">
+                <form id="contactForm">
                     <div class="form-group">
                         <label for="name">الاسم الكامل</label>
-                        <input type="text" id="name" placeholder="أدخل اسمك هنا" required>
+                        <input type="text" id="name" class="form-control" placeholder="أدخل اسمك هنا" required>
                     </div>
                     <div class="form-group">
                         <label for="email">البريد الإلكتروني</label>
-                        <input type="email" id="email" placeholder="name@example.com" required>
+                        <input type="email" id="email" class="form-control" placeholder="name@example.com" required>
                     </div>
                     <div class="form-group">
                         <label for="department">القسم المعني</label>
-                        <select id="department">
+                        <select id="department" class="form-control">
                             <option value="general">استفسار عام</option>
                             <option value="recruitment">التوظيف</option>
                             <option value="payroll">الرواتب</option>
@@ -728,7 +809,7 @@
                     </div>
                     <div class="form-group">
                         <label for="message">الرسالة</label>
-                        <textarea id="message" rows="5" placeholder="اكتب تفاصيل استفسارك هنا..." required></textarea>
+                        <textarea id="message" class="form-control" rows="5" placeholder="اكتب تفاصيل استفسارك هنا..." required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%;">إرسال الطلب</button>
                 </form>
@@ -742,8 +823,8 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <h4>عن الشركة</h4>
-                    <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">
-                        نحن مؤسسة رائدة نسعى لتحقيق التميز في بيئة العمل، ونسعى دائماً لراحة الموظفين وتطوير مهاراتهم.
+                    <p>
+                        نحن مؤسسة رائدة نسعى لتحقيق التميز في بيئة العمل. نؤمن بأن الموظف هو أصل الأصول، ونعمل جاهدين لتوفير بيئة تحفز الإبداع.
                     </p>
                 </div>
                 <div class="footer-col">
@@ -758,17 +839,118 @@
                 <div class="footer-col">
                     <h4>موظفو الشهر</h4>
                     <ul class="footer-links">
-                        <li><a href="#">أحمد محمد</a></li>
-                        <li><a href="#">سارة العلي</a></li>
-                        <li><a href="#">خالد عمر</a></li>
+                        <li><a href="#">أحمد محمد - قسم المبيعات</a></li>
+                        <li><a href="#">سارة العلي - قسم التسويق</a></li>
+                        <li><a href="#">خالد عمر - قسم تكنولوجيا المعلومات</a></li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>جميع الحقوق محفوظة &copy; 2023 قسم الموارد البشرية.</p>
+                <p>جميع الحقوق محفوظة &copy; 2023 قسم الموارد البشرية. تم التصميم بواسطة مساعد الذكاء الاصطناعي.</p>
             </div>
         </div>
     </footer>
 
+    <!-- عنصر التوست للإشعارات -->
+    <div id="toast">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        <span>تم استلام رسالتك بنجاح! شكراً لتواصلك معنا.</span>
+    </div>
+
+    <script>
+        // 1. Mobile Menu Logic
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            
+            // تبديل الأيقونة (اختياري، يمكن تطويره)
+            if(navLinks.classList.contains('active')) {
+                 mobileToggle.innerHTML = '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+            } else {
+                 mobileToggle.innerHTML = '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+            }
+        });
+
+        function closeMenu() {
+            navLinks.classList.remove('active');
+            mobileToggle.innerHTML = '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+        }
+
+        // 2. Sticky Header Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 3. Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 150;
+
+            revealElements.forEach((reveal) => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        // Trigger once on load
+        revealOnScroll();
+
+        // 4. Stats Counter Animation
+        const statsSection = document.querySelector('.stats');
+        const statsNumbers = document.querySelectorAll('.stat-item h3');
+        let started = false;
+
+        function startCount(el) {
+            const goal = parseInt(el.dataset.target);
+            const count = setInterval(() => {
+                const current = parseInt(el.innerText.replace(/\D/g, '')); // Remove non-digits
+                if(current < goal) {
+                    el.innerText = (current + 5) + (el.dataset.target.includes('%') ? '%' : '+'); // Increment by 5 for speed
+                } else {
+                    el.innerText = (goal > 99 ? '+' : '') + goal + (el.dataset.target.includes('%') ? '%' : '+');
+                    clearInterval(count);
+                }
+            }, 20);
+        }
+
+        window.addEventListener('scroll', () => {
+            if(!started && window.scrollY + window.innerHeight > statsSection.offsetTop) {
+                statsNumbers.forEach(num => startCount(num));
+                started = true;
+            }
+        });
+
+        // 5. Form Handling with Toast (No Alert)
+        const contactForm = document.getElementById('contactForm');
+        const toast = document.getElementById('toast');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop actual submission
+            
+            // Show Toast
+            toast.className = "show";
+            
+            // Clear form
+            contactForm.reset();
+
+            // Hide Toast after 3 seconds
+            setTimeout(function(){ 
+                toast.className = toast.className.replace("show", ""); 
+            }, 4000);
+        });
+
+    </script>
 </body>
 </html>
